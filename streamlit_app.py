@@ -45,14 +45,17 @@ st.title('Example Streamlit App')
 
 
 ## Add Date Input widgets
-start_date = st.date_input('Start Date', pd.to_datetime('2012-01-01'))
-end_date = st.date_input('End Date', datetime.date.today())
+start_date = st.sidebar.date_input('Start Date', pd.to_datetime('2012-01-01'))
+end_date = st.sidebar.date_input('End Date', datetime.date.today())
 
 ## Add Text Input for stocks
-stocks = st.text_input('Stock Symbols (separate with a ,)','AMZN,MSFT,FB')
+stocks = st.sidebar.text_input('Stock Symbols (separate with a ,)','AMZN,MSFT,FB')
 
 ## Retrieve and plot selected data
 df = get_data(start_date=start_date,end_date=end_date)
 
 fig = plot_stocks_df(df, stocks=stocks.split(','))
+df.head()
+
 st.plotly_chart(fig)
+
